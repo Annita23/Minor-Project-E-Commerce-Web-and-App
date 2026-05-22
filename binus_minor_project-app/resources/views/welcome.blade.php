@@ -11,9 +11,30 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
             <a class="navbar-brand" href="{{ route('home') }}">👕 RetroShop</a>
-            <span class="navbar-text text-white">Group Project</span>
+            
+            <div class="d-flex align-items-center">
+                @auth
+                    <span class="text-white me-3">Bonjour, {{ Auth::user()->first_name }} 👋</span>
+                    
+                    <form action="{{ route('logout') }}" method="POST" class="d-inline">
+                        @csrf
+                        <button type="submit" class="btn btn-sm btn-danger">Log Out</button>
+                    </form>
+                @else
+                    <a href="{{ route('login') }}" class="btn btn-sm btn-outline-light me-2">Login</a>
+                    <a href="{{ route('register') }}" class="btn btn-sm btn-primary">Register</a>
+                @endauth
+            </div>
         </div>
     </nav>
+
+    <div class="container mt-3">
+        @if(session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+            </div>
+        @endif
+    </div>
 
     <div class="container py-5">
         <h1 class="text-center mb-5">Our Clothing Collection</h1>
