@@ -10,11 +10,11 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="{{ route('home') }}">👕 RetroShop</a>
+            <a class="navbar-brand" href="{{ route('home') }}">RetroShop</a>
             
             <div class="d-flex align-items-center">
                 @auth
-                    <span class="text-white me-3">Bonjour, {{ Auth::user()->first_name }} 👋</span>
+                    <span class="text-white me-3">Hello, {{ Auth::user()->first_name }}</span>
                     
                     <form action="{{ route('logout') }}" method="POST" class="d-inline">
                         @csrf

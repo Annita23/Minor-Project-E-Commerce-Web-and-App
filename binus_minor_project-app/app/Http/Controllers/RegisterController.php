@@ -10,26 +10,22 @@ use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
-    // 1. Afficher le formulaire d'inscription
-    public function showRegistrationForm()
-    {
-        // On va chercher le fichier dans resources/views/auth/register.blade.php
-        return view('register'); 
-    }
+    // display registration form
+    public function showRegistrationForm() { return view('register'); }
 
-    // 2. Traiter l'inscription
+
     public function register(Request $request)
     {
-        // Validation stricte des données reçues
+        // validate incoming request data
         $request->validate([
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
             'phone_number' => ['nullable', 'string', 'max:20'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'], // attend un champ password_confirmation
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
 
-        // Création de l'utilisateur dans MySQL
+        // create new user in the database
         $user = User::create([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
@@ -38,10 +34,10 @@ class RegisterController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        // On connecte automatiquement l'utilisateur tout de suite après sa création
+        // connect the user immediately after registration
         Auth::login($user);
 
-        // Retour à l'accueil avec un message de succès
-        return redirect('/')->with('success', 'Votre compte a été créé avec succès ! Bienvenue !');
+        // redirect to home page with success message
+        return redirect('/')->with('success', 'You have been registered and logged in!');
     }
 }

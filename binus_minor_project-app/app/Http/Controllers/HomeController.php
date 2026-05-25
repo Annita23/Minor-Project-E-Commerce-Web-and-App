@@ -12,11 +12,4 @@ class HomeController extends Controller
         $products = Product::all(); // get all products from the database
         return view('welcome', compact('products'));
     }
-
-    public function show($id)
-    {
-        $product = Product::findOrFail($id); 
-        
-        return view('product-detail', compact('product'));
-    }
 }
