@@ -13,14 +13,18 @@
             <a class="navbar-brand" href="{{ route('home') }}">RetroShop</a>
             
             <div class="d-flex align-items-center">
-                @auth
-                    <span class="text-white me-3">Hello, {{ Auth::user()->first_name }}</span>
-                    
-                    <form action="{{ route('logout') }}" method="POST" class="d-inline">
-                        @csrf
-                        <button type="submit" class="btn btn-sm btn-danger">Log Out</button>
-                    </form>
-                @else
+              @auth
+    <span class="text-white me-3">Hello, {{ Auth::user()->first_name }}</span>
+
+    <a href="{{ route('cart.index') }}" class="btn btn-sm btn-warning me-2">
+        Cart
+    </a>
+    
+    <form action="{{ route('logout') }}" method="POST" class="d-inline">
+        @csrf
+        <button type="submit" class="btn btn-sm btn-danger">Log Out</button>
+    </form>
+@else
                     <a href="{{ route('login') }}" class="btn btn-sm btn-outline-light me-2">Login</a>
                     <a href="{{ route('register') }}" class="btn btn-sm btn-primary">Register</a>
                 @endauth
@@ -55,10 +59,19 @@
                                 <p class="card-text text-muted text-truncate">{{ $product->description }}</p>
                             </div>
                             
-                            <div class="mt-3 d-flex justify-content-between align-items-center">
-                                <span class="fs-5 fw-bold text-success">Rp {{ number_format($product->price, 0, ',', '.') }}</span>
-                                <a href="{{ route('product.show', $product->id) }}" class="btn btn-outline-primary btn-sm">View Product</a>
-                            </div>
+                            <div class="mt-3">
+    <div class="d-flex justify-content-between align-items-center">
+        <span class="fs-5 fw-bold text-success">Rp {{ number_format($product->price, 0, ',', '.') }}</span>
+        <a href="{{ route('product.show', $product->id) }}" class="btn btn-outline-primary btn-sm">View Product</a>
+    </div>
+
+    <form action="{{ route('cart.add', $product->id) }}" method="POST" class="mt-2">
+        @csrf
+        <button type="submit" class="btn btn-primary btn-sm w-100">
+            Add to Cart
+        </button>
+    </form>
+</div>
                         </div>
                     </div>
                 </div>

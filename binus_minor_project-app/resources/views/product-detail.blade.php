@@ -26,9 +26,14 @@
                     <p class="mt-3"><strong>Available Stock:</strong> {{ $product->stock }} pcs</p>
                 </div>
 
-                <div class="mt-4">
-                    <button class="btn btn-primary btn-lg w-100">🛒 Add to Cart</button>
-                </div>
+               <div class="mt-4">
+    <form action="{{ route('cart.add', $product->id) }}" method="POST">
+        @csrf
+        <button type="submit" class="btn btn-primary btn-lg w-100">
+            🛒 Add to Cart
+        </button>
+    </form>
+</div>
             </div>
         </div>
     </div>

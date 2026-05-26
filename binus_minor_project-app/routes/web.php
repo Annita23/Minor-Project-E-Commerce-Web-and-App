@@ -5,8 +5,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ProductController;
-// use App\Http\Controllers\CartController;
-// use App\Http\Controllers\OrderController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
 
 
 
@@ -22,4 +22,16 @@ Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->na
 Route::post('/register', [RegisterController::class, 'register']);
 
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
+
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::post('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
+Route::patch('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
+Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
+Route::delete('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
+
+Route::get('/checkout', [OrderController::class, 'checkout'])->name('checkout');
+Route::post('/place-order', [OrderController::class, 'placeOrder'])->name('place.order');
+Route::get('/order-success', [OrderController::class, 'success'])->name('order.success');
+
 
