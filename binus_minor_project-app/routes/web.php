@@ -24,6 +24,9 @@ Route::post('/register', [RegisterController::class, 'register']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
+// if not logged in, user will not be able to access cart and order routes
+Route::middleware(['auth'])->group(function () {
+
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
 Route::patch('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
@@ -34,4 +37,4 @@ Route::get('/checkout', [OrderController::class, 'checkout'])->name('checkout');
 Route::post('/place-order', [OrderController::class, 'placeOrder'])->name('place.order');
 Route::get('/order-success', [OrderController::class, 'success'])->name('order.success');
 
-
+});

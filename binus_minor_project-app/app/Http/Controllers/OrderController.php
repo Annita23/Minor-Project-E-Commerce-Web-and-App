@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
+
     public function checkout()
     {
         $cart = session()->get('cart', []);
@@ -20,6 +21,12 @@ class OrderController extends Controller
 
     public function placeOrder(Request $request)
     {
+        $cart = session()->get('cart', []);
+    
+        if (empty($cart)) {
+            return redirect()->route('home')->with('error', 'Your cart is empty!');
+        }
+
         $request->validate([
             'name' => 'required|string|max:255',
             'phone' => 'required|string|max:20',

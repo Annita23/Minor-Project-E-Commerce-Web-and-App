@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Clothing E-Commerce</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .btn-custom-cart:hover {
+            background-color: #ca9504 !important; /* Un jaune orangé plus sombre au survol */
+            border-color: #be8c04 !important;
+            color: #000 !important;
+        }
+    </style>
 </head>
 <body class="bg-light">
 
@@ -13,18 +20,20 @@
             <a class="navbar-brand" href="{{ route('home') }}">RetroShop</a>
             
             <div class="d-flex align-items-center">
-              @auth
-    <span class="text-white me-3">Hello, {{ Auth::user()->first_name }}</span>
+                @auth
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="text-white me-2">Hello, {{ Auth::user()->first_name }}</span>
 
-    <a href="{{ route('cart.index') }}" class="btn btn-sm btn-warning me-2">
-        Cart
-    </a>
-    
-    <form action="{{ route('logout') }}" method="POST" class="d-inline">
-        @csrf
-        <button type="submit" class="btn btn-sm btn-danger">Log Out</button>
-    </form>
-@else
+                        <a href="{{ route('cart.index') }}" class="btn btn-sm btn-warning btn-custom-cart" style="width: 85px;">
+                            Cart
+                        </a>
+                        
+                        <form action="{{ route('logout') }}" method="POST" class="m-0 p-0">
+                            @csrf
+                            <button type="submit" class="btn btn-sm btn-danger" style="width: 85px;">Log Out</button>
+                        </form>
+                    </div>
+                @else
                     <a href="{{ route('login') }}" class="btn btn-sm btn-outline-light me-2">Login</a>
                     <a href="{{ route('register') }}" class="btn btn-sm btn-primary">Register</a>
                 @endauth
@@ -60,18 +69,18 @@
                             </div>
                             
                             <div class="mt-3">
-    <div class="d-flex justify-content-between align-items-center">
-        <span class="fs-5 fw-bold text-success">Rp {{ number_format($product->price, 0, ',', '.') }}</span>
-        <a href="{{ route('product.show', $product->id) }}" class="btn btn-outline-primary btn-sm">View Product</a>
-    </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="fs-5 fw-bold text-success">Rp {{ number_format($product->price, 0, ',', '.') }}</span>
+                                    <a href="{{ route('product.show', $product->id) }}" class="btn btn-outline-primary btn-sm">View Product</a>
+                                </div>
 
-    <form action="{{ route('cart.add', $product->id) }}" method="POST" class="mt-2">
-        @csrf
-        <button type="submit" class="btn btn-primary btn-sm w-100">
-            Add to Cart
-        </button>
-    </form>
-</div>
+                                <form action="{{ route('cart.add', $product->id) }}" method="POST" class="mt-2">
+                                    @csrf
+                                    <button type="submit" class="btn btn-primary btn-sm w-100">
+                                        Add to Cart
+                                    </button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>

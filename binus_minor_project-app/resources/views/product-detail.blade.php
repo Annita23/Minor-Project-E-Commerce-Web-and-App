@@ -9,6 +9,14 @@
 <body class="bg-light">
 
     <div class="container py-5">
+        
+        @if(session('success'))
+            <div class="alert alert-success alert-dismissible fade show mb-4" role="alert">
+                {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="anonymous" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+
         <a href="{{ route('home') }}" class="btn btn-secondary mb-4">⬅️ Back to Shop</a>
 
         <div class="row bg-white p-4 rounded shadow-sm">
@@ -26,17 +34,18 @@
                     <p class="mt-3"><strong>Available Stock:</strong> {{ $product->stock }} pcs</p>
                 </div>
 
-               <div class="mt-4">
-    <form action="{{ route('cart.add', $product->id) }}" method="POST">
-        @csrf
-        <button type="submit" class="btn btn-primary btn-lg w-100">
-            🛒 Add to Cart
-        </button>
-    </form>
-</div>
+                <div class="mt-4">
+                    <form action="{{ route('cart.add', $product->id) }}" method="POST">
+                        @csrf
+                        <button type="submit" class="btn btn-primary btn-lg w-100">
+                            Add to Cart
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

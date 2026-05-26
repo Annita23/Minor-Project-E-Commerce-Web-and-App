@@ -23,10 +23,12 @@
                 @endif
 
                 <div class="card shadow p-4 bg-white rounded">
-                    <h2 class="text-center mb-4">👕 RetroShop Login</h2>
+                    <h2 class="text-center mb-4">RetroShop Login</h2>
 
                     <form action="{{ url('/login') }}" method="POST">
-                        @csrf <div class="mb-3">
+                        @csrf 
+                        
+                        <div class="mb-3">
                             <label for="email" class="form-label">Email address</label>
                             <input type="email" name="email" class="form-control" id="email" value="{{ old('email') }}" required placeholder="test@example.com">
                         </div>
@@ -37,9 +39,14 @@
                         </div>
 
                         <button type="submit" class="btn btn-dark w-100 btn-lg">Sign In</button>
+
+                        <div class="text-center mt-4">
+                            <span class="text-muted">Don't have an account?</span> 
+                            <a href="{{ route('register') }}" class="text-dark fw-bold text-decoration-none">Sign Up</a>
+                        </div>
                     </form>
 
-                    <div class="text-center mt-4">
+                    <div class="text-center mt-4 border-top pt-3">
                         <a href="{{ route('home') }}" class="text-muted text-decoration-none">← Back to shop</a>
                     </div>
                 </div>

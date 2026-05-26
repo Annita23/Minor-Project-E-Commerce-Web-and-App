@@ -65,6 +65,10 @@
                     <div class="text-center mt-3">
                         <a href="{{ route('login') }}" class="text-muted text-decoration-none">Already have an account? Login</a>
                     </div>
+
+                    <div class="text-center mt-3 border-top pt-3">
+                        <a href="{{ route('home') }}" class="text-muted text-decoration-none">← Back to shop</a>
+                    </div>
                 </div>
             </div>
         </div>

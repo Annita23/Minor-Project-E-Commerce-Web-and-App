@@ -71,13 +71,20 @@
     @endif
 
     <div class="mt-4 d-flex gap-2">
-    <a href="{{ route('checkout') }}" class="btn btn-success btn-lg px-4">
-        Proceed to Checkout
-    </a>
-    <a href="{{ route('home') }}" class="btn btn-outline-secondary btn-lg px-4">
-        Continue Shopping
-    </a>
-</div>
+        @if(count($cart) > 0)
+            <a href="{{ route('checkout') }}" class="btn btn-success btn-lg px-4">
+                Proceed to Checkout
+            </a>
+        @else
+            <button class="btn btn-success btn-lg px-4" disabled>
+                Proceed to Checkout
+            </button>
+        @endif
+
+        <a href="{{ route('home') }}" class="btn btn-outline-secondary btn-lg px-4">
+            Continue Shopping
+        </a>
+    </div>
 </div>
 </body>
 </html>

@@ -15,4 +15,11 @@ class ProductController extends Controller
 
         return view('product-detail', compact('product'));
     }
+
+    // for android app
+    public function apiIndex()
+    {
+        // Get all products and return as JSON
+        return response()->json(\App\Models\Product::all());
+    }
 }
