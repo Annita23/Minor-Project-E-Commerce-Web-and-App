@@ -24,6 +24,10 @@
                     <div class="d-flex align-items-center gap-2">
                         <span class="text-white me-2">Hello, {{ Auth::user()->first_name }}</span>
 
+                        <a href="{{ route('orders.index') }}" class="btn btn-sm btn-outline-light" style="width: 85px;">
+                            Orders
+                        </a>
+
                         <a href="{{ route('cart.index') }}" class="btn btn-sm btn-warning btn-custom-cart" style="width: 85px;">
                             Cart
                         </a>
@@ -56,7 +60,7 @@
             @foreach($products as $product)
                 <div class="col-md-4">
                     <div class="card h-100 shadow-sm">
-                        <img src="{{ $product->image_url ?? 'https://via.placeholder.com/300' }}" class="card-img-top" alt="{{ $product->name }}" style="height: 450px; object-fit: cover;">
+                        <img src="{{ $product->image ?? $product->image_url ?? 'https://via.placeholder.com/300' }}" class="card-img-top" alt="{{ $product->name }}" style="height: 450px; object-fit: cover;">
                         
                         <div class="card-body d-flex flex-column justify-content-between">
                             <div>
